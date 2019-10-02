@@ -1,0 +1,12 @@
+{
+  "name": "extas.protocol.access",
+  "protocols": [
+    {
+      "name": "access",
+      "title": "Extas Access",
+      "description": "Parse headers and request parameters for access attributes (section, subject, operation)",
+      "accept": ["*"],
+      "class": "extas\\components\\protocols\\ProtocolExtasAccess"
+    }
+  ]
+}
