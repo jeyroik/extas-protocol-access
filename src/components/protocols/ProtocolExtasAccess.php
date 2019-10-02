@@ -26,14 +26,31 @@ class ProtocolExtasAccess extends Protocol
 
         $fromHeaders = $this->grabHeaders($request, $accessEntities);
         $fromParameters = $this->grabParameters($request, $accessEntities);
+        $defaults = $this->getDefaults($accessEntities);
 
         foreach ($accessEntities as $entity) {
-            if (isset($fromParameters[$entity])) {
-                $args[$entity] = $fromParameters[$entity];
-            } elseif (isset($fromHeaders[$entity])) {
-                $args[$entity] = $fromHeaders[$entity];
+            if (!isset($args[$entity])) {
+                $args[$entity] = $fromParameters[$entity] ?? ($fromHeaders[$entity] ?? ($defaults[$entity] ?? ''));
             }
         }
+    }
+
+    /**
+     * @param array $accessEntities
+     *
+     * @return array
+     */
+    protected function getDefaults(array $accessEntities)
+    {
+        $prefix = 'EXTAS__PROTOCOL_ACCESS__DEFAULT__';
+
+        $defaults = [];
+
+        foreach ($accessEntities as $entity) {
+            $defaults[$entity] = getenv($prefix . strtoupper($entity)) ?: '';
+        }
+
+        return $defaults;
     }
 
     /**

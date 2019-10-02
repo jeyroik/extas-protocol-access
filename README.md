@@ -9,3 +9,9 @@ Access protocol package for Extas
 - `x-extas-operation`
 
 Переопределить префикс можно через переменную окружения `EXTAS__PROTOCOL_ACCESS__HEADER_PREFIX`.
+
+Также через переменные окружения можно задать значения по умолчанию:
+
+- `EXTAS__PROTOCOL_ACCESS__DEFAULT__SECTION`
+- `EXTAS__PROTOCOL_ACCESS__DEFAULT__SUBJECT`
+- `EXTAS__PROTOCOL_ACCESS__DEFAULT__OPERATION`
