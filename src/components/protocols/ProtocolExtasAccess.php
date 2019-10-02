@@ -18,19 +18,21 @@ class ProtocolExtasAccess extends Protocol
      * @param array $args
      * @param RequestInterface $request
      */
-    public function __invoke(array &$args = [], RequestInterface $request)
+    public function __invoke(array &$args = [], RequestInterface $request = null)
     {
-        $accessEntities = [
-            IAccess::FIELD__SECTION, IAccess::FIELD__SUBJECT, IAccess::FIELD__OPERATION
-        ];
+        if ($request) {
+            $accessEntities = [
+                IAccess::FIELD__SECTION, IAccess::FIELD__SUBJECT, IAccess::FIELD__OPERATION
+            ];
 
-        $fromHeaders = $this->grabHeaders($request, $accessEntities);
-        $fromParameters = $this->grabParameters($request, $accessEntities);
-        $defaults = $this->getDefaults($accessEntities);
+            $fromHeaders = $this->grabHeaders($request, $accessEntities);
+            $fromParameters = $this->grabParameters($request, $accessEntities);
+            $defaults = $this->getDefaults($accessEntities);
 
-        foreach ($accessEntities as $entity) {
-            if (!isset($args[$entity])) {
-                $args[$entity] = $fromParameters[$entity] ?? ($fromHeaders[$entity] ?? ($defaults[$entity] ?? ''));
+            foreach ($accessEntities as $entity) {
+                if (!isset($args[$entity])) {
+                    $args[$entity] = $fromParameters[$entity] ?? ($fromHeaders[$entity] ?? ($defaults[$entity] ?? ''));
+                }
             }
         }
     }
