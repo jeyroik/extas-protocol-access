@@ -2,7 +2,7 @@
   "name": "jeyroik/extas-protocol-access",
   "description": "Extas access protocol package",
   "require": {
-    "jeyroik/extas-protocols":"*"
+    "jeyroik/extas-protocols":"1.*"
   },
   "autoload": {
     "psr-4": {

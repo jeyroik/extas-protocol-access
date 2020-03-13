@@ -12,7 +12,7 @@ use Psr\Http\Message\RequestInterface;
  */
 class ProtocolExtasAccess extends Protocol
 {
-    const HEADER__PREFIX = 'x-extas-';
+    public const HEADER__PREFIX = 'x-extas-';
 
     /**
      * @param array $args
@@ -30,7 +30,7 @@ class ProtocolExtasAccess extends Protocol
             $defaults = $this->getDefaults($accessEntities);
 
             foreach ($accessEntities as $entity) {
-                if (!isset($args[$entity])) {
+                if (!isset($args[$entity]) || !$args[$entity]) {
                     $args[$entity] = $fromParameters[$entity] ?? ($fromHeaders[$entity] ?? ($defaults[$entity] ?? ''));
                 }
             }
