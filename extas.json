@@ -1,5 +1,5 @@
 {
-  "name": "extas.protocol.access",
+  "name": "extas/protocol-access",
   "protocols": [
     {
       "name": "access",
